@@ -16,12 +16,11 @@ import navigationdraweractivitydata.R;
 
 
 public class ColorRVAdapter extends RecyclerView.Adapter<ColorRVAdapter.ColorViewHolder> {
-    private ArrayList<Pair<String,Integer>> colors;
     private ColorsItemClickListener colorsItemClickListener;
     private ArrayList<Pair<String,Integer>> bgColors;
 
     public interface ColorsItemClickListener {
-        void onColorItemClicked(RecyclerView.ViewHolder vh, Pair<String,Integer> color, int pos);
+        void onColorItemClicked(Pair<String,Integer> color);
     }
 
     public ColorRVAdapter(ColorsItemClickListener listener) {
@@ -55,7 +54,7 @@ public class ColorRVAdapter extends RecyclerView.Adapter<ColorRVAdapter.ColorVie
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                colorsItemClickListener.onColorItemClicked(holder,color, holder.getAdapterPosition());
+                colorsItemClickListener.onColorItemClicked(color);
             }
         });
 
@@ -73,7 +72,7 @@ public class ColorRVAdapter extends RecyclerView.Adapter<ColorRVAdapter.ColorVie
 
     // --------- IMPLEMENTACION DE NUESTRO VIEW HOLDER ESPECÍFICO ----------------------------
     // stores and recycles views as they are scrolled off screen
-    public class ColorViewHolder extends RecyclerView.ViewHolder {
+    public class ColorViewHolder extends RecyclerView.ViewHolder{
         TextView tvColor;
 
         ColorViewHolder(View itemView) {
@@ -82,6 +81,4 @@ public class ColorRVAdapter extends RecyclerView.Adapter<ColorRVAdapter.ColorVie
         }
     }
     // ---------------------------------------------------------------------------------------
-
-
 }

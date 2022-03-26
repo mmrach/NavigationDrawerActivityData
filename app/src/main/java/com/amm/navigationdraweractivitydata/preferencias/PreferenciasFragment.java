@@ -100,12 +100,20 @@ public class PreferenciasFragment extends Fragment  implements ColorRVAdapter.Co
 
         selectedColor = fragmentListener.getSelectedColor();
         if (selectedColor != null){
-            getView().findViewById(R.id.tvSelectedColor).setBackgroundColor(selectedColor.second);
+            TextView tvSelectedColor = view.findViewById(R.id.tvSelectedColor);
+
+            tvSelectedColor.setBackgroundColor(selectedColor.second);
+            tvSelectedColor.setText(selectedColor.first.toString());
+
+            if (selectedColor.second == Color.BLUE || selectedColor.second == Color.BLACK){
+                tvSelectedColor.setTextColor(Color.WHITE);
+            }
+            else tvSelectedColor.setTextColor(Color.BLACK);
         }
     }
 
     @Override
-    public void onColorItemClicked(RecyclerView.ViewHolder vh, Pair<String,Integer> color, int pos) {
+    public void onColorItemClicked(Pair<String,Integer> color) {
         TextView tvSelectedColor = getView().findViewById(R.id.tvSelectedColor);
 
         tvSelectedColor.setBackgroundColor(color.second);
@@ -115,7 +123,7 @@ public class PreferenciasFragment extends Fragment  implements ColorRVAdapter.Co
             tvSelectedColor.setTextColor(Color.WHITE);
         }
         else tvSelectedColor.setTextColor(Color.BLACK);
-        //Toast.makeText(getActivity(), "Item clicked: " + pos + " " + color.first.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Item clicked: " + color.first.toString(), Toast.LENGTH_SHORT).show();
 
         fragmentListener.setSelectedColor(color);
     }
